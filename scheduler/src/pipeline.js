@@ -14,7 +14,7 @@
  *    d. Each raw Cloudinary image is composed with the compositor service
  *       (adds caption overlay, brand watermark, slide counter)
  *    e. Each composed PNG is uploaded to Cloudinary (qulo/composed folder)
- * 3. Each completed carousel (6 composed image URLs) is posted to TikTok as a draft
+ * 3. Each completed carousel (6 composed image URLs) is scheduled on TikTok via Publer
  * 4. Topics are marked as used in Airtable
  * 5. Results array is returned
  *
@@ -22,7 +22,7 @@
  * ─────────────────────────────────────────────────────────
  * 1. Fetch current topic + rotating archetype from Airtable
  * 2. Claude generates a tweet (streamed, max 280 chars)
- * 3. Tweet is posted to X/Twitter via API v2
+ * 3. Tweet is posted to X/Twitter via Publer REST API
  * 4. Result is returned
  *
  * All steps have individual error handling so a single failure does not
