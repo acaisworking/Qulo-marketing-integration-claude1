@@ -1,0 +1,19 @@
+[build]
+builder = "nixpacks"
+
+[[services]]
+name = "compositor"
+source = "compositor"
+startCommand = "node server.js"
+
+[services.variables]
+PORT = "3000"
+
+[[services]]
+name = "scheduler"
+source = "scheduler"
+startCommand = "node server.js"
+
+[services.variables]
+PORT = "3001"
+TZ = "Asia/Dubai"
