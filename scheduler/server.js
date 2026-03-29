@@ -47,6 +47,24 @@ app.post('/run/carousel', async (req, res) => {
   }
 });
 
+// Browser-friendly GET trigger: carousel pipeline
+app.get('/trigger/carousel', async (req, res) => {
+  console.log('[scheduler] GET /trigger/carousel — carousel pipeline triggered');
+  res.json({ message: 'Carousel pipeline started', timestamp: new Date().toISOString() });
+
+  try {
+    const results = await runCarouselPipeline();
+    status.carousel.lastRun = new Date().toISOString();
+    status.carousel.lastResult = results;
+    status.carousel.lastError = null;
+    console.log('[scheduler] GET /trigger/carousel completed:', results.length, 'carousels');
+  } catch (err) {
+    status.carousel.lastRun = new Date().toISOString();
+    status.carousel.lastError = err.message;
+    console.error('[scheduler] GET /trigger/carousel failed:', err.message);
+  }
+});
+
 // Manual trigger: tweet pipeline
 app.post('/run/tweet', async (req, res) => {
   const tweetIndex = req.body.tweetIndex !== undefined ? Number(req.body.tweetIndex) : 0;
