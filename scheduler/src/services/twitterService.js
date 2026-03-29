@@ -28,7 +28,7 @@ async function postTweet(text) {
   const trimmed = text.trim().substring(0, 280);
 
   const postPayload = {
-    profiles: [profileId],
+    profile_ids: [profileId],
     text: trimmed,
     shorten_links: false,
   };
