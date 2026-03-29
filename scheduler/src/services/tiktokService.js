@@ -37,9 +37,9 @@ async function postCarouselDraft({ title, imageUrls }) {
   const scheduleAt  = process.env.PUBLER_TIKTOK_SCHEDULE_AT || null;
 
   const payload = {
-    profiles:   [profileId],
-    text:       caption,
-    media_urls: imageUrls,
+    profile_ids: [profileId],
+    text:        caption,
+    media_urls:  imageUrls,
     ...(scheduleAt ? { publish_at: scheduleAt } : {}),
   };
 
@@ -47,7 +47,7 @@ async function postCarouselDraft({ title, imageUrls }) {
     console.log(`[tiktokService] Scheduling TikTok carousel via Publer: "${caption}" (${imageUrls.length} images)`);
 
     const response = await axios.post(
-      `${PUBLER_API_BASE}/post`,
+      `${PUBLER_API_BASE}/posts`,
       payload,
       {
         headers: {

@@ -35,7 +35,7 @@ async function postTweet(text) {
 
   async function attemptPost() {
     const response = await axios.post(
-      `${PUBLER_API_BASE}/post`,
+      `${PUBLER_API_BASE}/posts`,
       postPayload,
       {
         headers: {
